@@ -73,11 +73,11 @@ function parse_commandline()
       "--Nx", "-x"
         help = "Number of columns in the lattice."
         arg_type = Int
-        default = 2 
+        default = 3 
       "--Ny", "-y"
         help = "Number of rows in the lattice."
         arg_type = Int
-        default = 2
+        default = 1
       "--outputpath", "-o"
         help = "Where to save output. Default is ./ising. The full output 
                 string is formatted to also include the arguments; e.g.
@@ -121,6 +121,7 @@ function applycycleperm(v, out, ham, cycleperm, cyclelength)
         v, out = reshape(v, siteshp), reshape(out, siteshp) 
         v, out = permutedims(v, cycleperm), permutedims(out, cycleperm)
     end
+    out = reshape(out, D)
     return v, out
 end
 
@@ -223,6 +224,7 @@ function findgroundstate_ising(parsed_args::Dict)
   applyisingham(v) = applyspinham(v, isingham, Nx, Ny)
   H = LinearMap(applyisingham, 2^N)
   u, v = eigs(H; nev=1, which=:SR)
+  v/=sum(abs2(v)) #normalize
   energy = real(u[1])#/N
   edensity = energy/N
   #infN_e_density = -4/pi
