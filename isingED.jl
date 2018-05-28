@@ -65,7 +65,7 @@ function parse_commandline()
       "--hfield" 
         help = "Magnetic field parameter."
         arg_type = Real
-        default = 1.0
+        default = 0.0
       "--Jcoupling", "-J"
         help = "Coupling constant."
         arg_type = Real
@@ -73,11 +73,11 @@ function parse_commandline()
       "--Nx", "-x"
         help = "Number of columns in the lattice."
         arg_type = Int
-        default = 3 
+        default = 4 
       "--Ny", "-y"
         help = "Number of rows in the lattice."
         arg_type = Int
-        default = 1
+        default = 4
       "--outputpath", "-o"
         help = "Where to save output. Default is ./ising. The full output 
                 string is formatted to also include the arguments; e.g.
@@ -224,7 +224,7 @@ function findgroundstate_ising(parsed_args::Dict)
   applyisingham(v) = applyspinham(v, isingham, Nx, Ny)
   H = LinearMap(applyisingham, 2^N)
   u, v = eigs(H; nev=1, which=:SR)
-  v/=sum(abs2(v)) #normalize
+  v/=sqrt(sum(abs2(v))) #normalize
   energy = real(u[1])#/N
   edensity = energy/N
   #infN_e_density = -4/pi
