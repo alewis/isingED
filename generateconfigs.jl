@@ -41,17 +41,16 @@ function measure(wf::AbstractArray)
   for n = 1:Nsites
     shape=(2^(Nsites-n), 2)
     wf = reshape(wf, shape) 
-    println("Sum:", sum(abs2(wf))) 
     #println(abs2(wf[:,1]))
     P0 = sum(abs2(wf[:,1]))
     @assert P0>=0 && P0<(1.0+1e-12) "P0 was $P0 which is not a probability"
     roll = rand()
     if roll < P0
       outcome = 0
-      wf = wf[:,1] / P0 #this is the Born rule
+      wf = wf[:,1] / sqrt(P0) #this is the Born rule
     else
       outcome = 1
-      wf = wf[:,2] / (1-P0)
+      wf = wf[:,2] / sqrt(1-P0)
     end
     measurement[Nsites-n+1] = outcome
   end
