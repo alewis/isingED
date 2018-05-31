@@ -42,7 +42,7 @@ function measure(wf::AbstractArray)
     shape=(2^(Nsites-n), 2)
     wf = reshape(wf, shape) 
     #println(abs2(wf[:,1]))
-    P0 = sum(abs2(wf[:,1]))
+    P0 = sum(abs2.(wf[:,1]))
     @assert P0>=0 && P0<(1.0+1e-12) "P0 was $P0 which is not a probability"
     roll = rand()
     if roll < P0
@@ -58,6 +58,31 @@ function measure(wf::AbstractArray)
 end
 
 """
+***UNIMPLEMENTED***
+Transforms the wavefunction so that computational-basis measurements upon
+it are equivalent to measurements of the given string of Pauli operators
+(0 -> I, 1->X, 2->Y, 3->Z).
+
+For now this is just a null-op.
+"""
+function transformtopauli(wavefunction::AbstractArray, paulis::AbstractVector)
+    return wavefunction
+end
+
+function writetofile(f, array)
+    N = length(array)
+    for i = 1:N
+      write(f,  string(array[i]))
+      if i!=N
+        write(f, ",")
+      else
+        write(f, ";")
+      end
+    end
+end
+
+
+"""
 Generates N measurements from the wavefunction and saves them to disk.
 The overwrite flag determines whether the output file is overwritten or
 appended to.
@@ -71,16 +96,19 @@ function savemeasurements(wavefunction::AbstractArray,
   end
   open(outfilename, mode) do f
     for n = 1:N
-      measurement = measure(wavefunction)
-      println(measurement)
-      for i = 1:length(measurement)
-        write(f,  string(measurement[i]))
-        write(f, ",")
-      end
+      Nsites = convert(Int64, log2(length(wavefunction)))
+      paulis = [rand(0:3) for j in 1:Nsites] 
+      pauliwf = transformtopauli(wavefunction, paulis)
+      measurement = measure(pauliwf)
+      println("Pauli ops: ", paulis)
+      writetofile(f, paulis)
+      println("Outcome: ", measurement)
+      writetofile(f, measurement)
       write(f, "\n")
     end
   end
 end
+
 
 function main()
   parsed_args = parse_commandline()
