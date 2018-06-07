@@ -31,24 +31,24 @@ _ _ _
 
 (note Julia arrays are column-major), we need to do this for each row
 and once for each column of the lattice:
-  i.e. (123)(4)(5)(6)(7)(8)(9) for a full cycle, then
-      (456)..., then (789), then (147), (456), and (789).
-      The present code handles this by first generating all of the necessary permutations
-      in the arrays permuteidxs and permutevals, then applying a full cycle of each
-      one.
+i.e. (123)(4)(5)(6)(7)(8)(9) for a full cycle, then
+(456)..., then (789), then (147), (456), and (789).
+The present code handles this by first generating all of the necessary permutations
+in the arrays permuteidxs and permutevals, then applying a full cycle of each
+one.
 
-      The wavefunction is then saved to disk as an array with shape 
-      (2, 2, 2, ... N). Each index runs over the two spin states of a particular
-      site. 
+The wavefunction is then saved to disk as an array with shape 
+(2, 2, 2, ... N). Each index runs over the two spin states of a particular
+site. 
 
-      As a quick test, with hfield=0 the energy density should be -J*dim, where 
-      dim is the dimensionality of the lattice.
+As a quick test, with hfield=0 the energy density should be -J*dim, where 
+dim is the dimensionality of the lattice.
 
-      Unlike Morningstar's
-      code, no effort is made to find a compressed basis using symmetry structures 
-      (e.g. the wavefunction has 2^N elements). This makes the code much easier
-      to write, but considerably less efficient; about 16 lattice sites is probably
-      the most it can handle.
+Unlike Morningstar's
+code, no effort is made to find a compressed basis using symmetry structures 
+(e.g. the wavefunction has 2^N elements). This makes the code much easier
+to write, but considerably less efficient; about 16 lattice sites is probably
+the most it can handle.
 
       This code is a slight modification of Markus Hauru's implementation,
       which covers the 1D case. That code can be found at
