@@ -12,18 +12,26 @@ permutations are exhausted. Periodic boundary conditions and translation
 invariance are both assumed.
 
 For a 1D lattice, i.e.
-```_ _ _ _ 
-1 2 3 4```
+```
+_ _ _ _ 
+1 2 3 4
+```
 we need to apply the permutation (1 2 3 4) for a full cycle: i.e.
 the action of the local hamiltonian on each of
 [1 2 3 4],  [4 1 2 3], [3 4 1 2], and [2 3 4 1] needs to be summed. For a
 2D lattice, say
+```
 _ _ _
 1 4 7
+```
+```
 _ _ _
 2 5 8
+```
+```
 _ _ _
 3 6 9
+```
 
 (note Julia arrays are column-major), we need to do this for each row
 and once for each column of the lattice:
