@@ -1,0 +1,5 @@
+Pkg.add("ArgParse")
+Pkg.add("LinearMaps")
+Pkg.add("HDF5")
+Pkg.add("JLD")
+Pkg.update()
