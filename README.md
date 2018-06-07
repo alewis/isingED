@@ -50,9 +50,9 @@ code, no effort is made to find a compressed basis using symmetry structures
 to write, but considerably less efficient; about 16 lattice sites is probably
 the most it can handle.
 
-      This code is a slight modification of Markus Hauru's implementation,
-      which covers the 1D case. That code can be found at
-      https://github.com/mhauru/MPS-in-Julia-minicourse/blob/master/meeting_01.ipynb.
+This code is a slight modification of Markus Hauru's implementation,
+which covers the 1D case. That code can be found at
+https://github.com/mhauru/MPS-in-Julia-minicourse/blob/master/meeting_01.ipynb.
 
 ### Dependencies
 To install dependencies, run `dependencies.jl`:
