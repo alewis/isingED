@@ -23,12 +23,8 @@ the action of the local hamiltonian on each of
 ```
 _ _ _
 1 4 7
-```
-```
 _ _ _
 2 5 8
-```
-```
 _ _ _
 3 6 9
 ```
