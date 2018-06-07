@@ -12,8 +12,8 @@ permutations are exhausted. Periodic boundary conditions and translation
 invariance are both assumed.
 
 For a 1D lattice, i.e.
-_ _ _ _ 
-1 2 3 4
+```_ _ _ _ 
+1 2 3 4```
 we need to apply the permutation (1 2 3 4) for a full cycle: i.e.
 the action of the local hamiltonian on each of
 [1 2 3 4],  [4 1 2 3], [3 4 1 2], and [2 3 4 1] needs to be summed. For a
