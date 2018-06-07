@@ -59,4 +59,4 @@ To install dependencies, run `dependencies.jl`:
 ```
 julia dependencies.jl
 ```
-
+If errors occur, try updating Julia to v0.6.3 (the version in the Ubuntu repos did *not* work) 
