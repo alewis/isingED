@@ -2,6 +2,7 @@
 
 using ArgParse, LinearMaps, HDF5, JLD
 
+
 function parse_commandline()
     s = ArgParseSettings()
     @add_arg_table s begin
@@ -54,7 +55,7 @@ needs to be supplied..
 function applycycleperm(v, out, ham, cycleperm, cyclelength)
     D = length(v)
     N = convert(Int64, log2(D))
-    siteshp = tuple(collect(repeated(2,N))...)#siteshp=(2,2,2..) i.e. each dim is a site
+    siteshp = tuple(collect(Iterators.repeated(2,N))...)#siteshp=(2,2,2..) i.e. each dim is a site
                                               #  with one entry per spin state
     for n=1:cyclelength
         #reshape so we can apply ham
@@ -107,7 +108,7 @@ function applyspinham(v::AbstractVector, ham::Matrix, Nx::Int, Ny::Int)
     D = length(v)
     N = Nx*Ny
     @assert D==2^N "D ($D) didn't equal 2^N (2^$N)"
-    siteshp = tuple(collect(repeated(2,N))...)#siteshp=(2,2,2..) i.e. each dim is a site
+    siteshp = tuple(collect(Iterators.repeated(2,N))...)#siteshp=(2,2,2..) i.e. each dim is a site
                                               #  with one entry per spin state
     out = zeros(siteshp)
 
