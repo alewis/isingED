@@ -9,7 +9,7 @@ function parse_commandline()
       "--hfield" 
         help = "Magnetic field parameter."
         arg_type = Real
-        default = 0.0
+        default = 2.0
       "--Jcoupling", "-J"
         help = "Coupling constant."
         arg_type = Real
@@ -17,11 +17,11 @@ function parse_commandline()
       "--Nx", "-x"
         help = "Number of columns in the lattice."
         arg_type = Int
-        default = 4 
+        default = 10
       "--Ny", "-y"
         help = "Number of rows in the lattice."
         arg_type = Int
-        default = 4
+        default = 1
       "--outputpath", "-o"
         help = "Where to save output. Default is ./ising. The full output 
                 string is formatted to also include the arguments; e.g.
